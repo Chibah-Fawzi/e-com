@@ -10,17 +10,19 @@ var contenuHTML = ""
 
 for (let i = 0; i < names.length; i++) {
 
-    var product = {
-        name: names[i],
-        price: prices[i],
-        description: descriptions[i],
-        image: images[i]
-    }
+  var product = {
+    id: i,
+    name: names[i],
+    price: prices[i],
+    description: descriptions[i],
+    image: images[i],
+    quantity: 1
+  }
 
-    productList.push(product)
+  productList.push(product)
 
-    /*html */
-    contenuHTML += `
+  /*html */
+  contenuHTML += `
     <div class='col'>
 <div class="card" style="width: 18rem;">
   <img class="card-img-top" src=${product.image} width="200px" alt="Card image cap">
@@ -40,3 +42,4 @@ for (let i = 0; i < names.length; i++) {
 const productDiv = document.getElementById('products')
 
 productDiv.innerHTML = contenuHTML
+
