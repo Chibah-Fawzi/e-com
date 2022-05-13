@@ -31,15 +31,34 @@ for (let i = 0; i < names.length; i++) {
     <p class="card-text">${product.description}</p>
     <div class="d-flex flex-row-reverse align-items-center justify-content-between">
     <p>${product.price}$</p>
-    <a href="#" class="btn btn-primary">Ajouter au panier</a>
+    <a onclick='AjouterAuPanier(${i})' href="#" class="btn btn-primary">Ajouter au panier</a>
   </div>
   </div>
   </div>
 </div>
 `
 }
-
 const productDiv = document.getElementById('products')
-
 productDiv.innerHTML = contenuHTML
 
+
+var contenuPanier = ""
+
+function AjouterAuPanier(index) {
+  var produitActuel = productList[index]
+
+  var panierDiv = document.getElementById('cartItems')
+
+  contenuPanier += `
+                            <tr>
+                                <td>${produitActuel.id}</td>
+                                <td>${produitActuel.name}</td>
+                                <td>${produitActuel.quantity}</td>
+                                <td>${produitActuel.price}</td>
+                                <td><button>Delete</button></td>
+                            </tr>
+                            `
+
+  panierDiv.innerHTML = contenuPanier
+
+}
