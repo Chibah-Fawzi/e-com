@@ -57,24 +57,31 @@ function AjouterAuPanier(index) {
     listePanier.map(produit => {
       if (produit.id == found.id) {
         produit.quantity++
-        document.getElementById("Quantity" + produit.id).innerHTML = produit.quantity
+        document.getElementById('quantity' + produit.id).innerHTML = produit.quantity
       }
     })
   } else {
 
     listePanier.push(produitActuel)
 
+    /*html */
+
     contenuPanier += `
-                            <tr>
+                            <tr id='product${produitActuel.id}'>
                                 <td>${produitActuel.id}</td>
                                 <td>${produitActuel.name}</td>
                                 <td id='quantity${produitActuel.id}'>${produitActuel.quantity}</td>
-                                <td id='price${produitActuel.id}'>${produitActuel.price}</td>
-                                <td><button>Delete</button></td>
+                                <td>${produitActuel.price}</td>
+                                <td><button onclick='deleteItem(${produitActuel.id})'>Delete</button></td>
                             </tr>
                             `
 
     panierDiv.innerHTML = contenuPanier
   }
 
+}
+
+function deleteItem(id) {
+  listePanier.filter(produit => produit.id != id)
+  document.getElementById('product' + id).remove()
 }
