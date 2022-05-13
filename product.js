@@ -44,21 +44,37 @@ productDiv.innerHTML = contenuHTML
 
 var contenuPanier = ""
 
+var listePanier = []
+
 function AjouterAuPanier(index) {
   var produitActuel = productList[index]
 
   var panierDiv = document.getElementById('cartItems')
 
-  contenuPanier += `
+  const found = listePanier.find((element) => element.id == produitActuel.id)
+
+  if (found) {
+    listePanier.map(produit => {
+      if (produit.id == found.id) {
+        produit.quantity++
+        document.getElementById("Quantity" + produit.id).innerHTML = produit.quantity
+      }
+    })
+  } else {
+
+    listePanier.push(produitActuel)
+
+    contenuPanier += `
                             <tr>
                                 <td>${produitActuel.id}</td>
                                 <td>${produitActuel.name}</td>
-                                <td>${produitActuel.quantity}</td>
-                                <td>${produitActuel.price}</td>
+                                <td id='quantity${produitActuel.id}'>${produitActuel.quantity}</td>
+                                <td id='price${produitActuel.id}'>${produitActuel.price}</td>
                                 <td><button>Delete</button></td>
                             </tr>
                             `
 
-  panierDiv.innerHTML = contenuPanier
+    panierDiv.innerHTML = contenuPanier
+  }
 
 }
